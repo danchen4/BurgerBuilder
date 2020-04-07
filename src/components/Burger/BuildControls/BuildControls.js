@@ -20,6 +20,7 @@ const buildControls = (props) => (
         added={()=>props.ingredientAdded(item.type)}
         removed={()=>props.ingredientremoved(item.type)}
         disabled={props.disabled[item.type]}
+        count={props.ingredients[item.type]}
       />
     })}
     <button 

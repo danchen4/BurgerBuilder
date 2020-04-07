@@ -35,6 +35,17 @@
   width: 80px;
 }
 
+.Count {
+  height: 100%;
+  background-color: white;
+  width: 40px;
+  margin: 0 0.5rem;
+  padding: 0.2rem;
+  text-align: center;
+  box-shadow: inset 0 0 3px #ccc;
+  border: 1px solid #aa6817;
+}
+
 .BuildControl .Less {
   background-color: #d39952;
   color: white;

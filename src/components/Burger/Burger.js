@@ -1,18 +1,26 @@
 import React from 'react';
 import classes from './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
+import {flattenDeep} from 'lodash';
 
 const burger = (props) => {
 
-  let transformedIngredients = Object.keys(props.ingredients)
-    .map((igKey) => {
-      return [...Array(props.ingredients[igKey])].map((_,index) => { //Creates Array of Arrays
-          return <BurgerIngredient key={igKey + index} type={igKey}/>
-      });
-    })
-    .reduce((prevElementArray, currentElementArray)=>{ //Flattens array
-      return prevElementArray.concat(currentElementArray);
-    },[]);
+  // let transformedIngredients = Object.keys(props.ingredients)
+  //   .map((igKey) => {
+  //     return [...Array(props.ingredients[igKey])].map((_,index) => { //Creates Array of Arrays
+  //         return <BurgerIngredient key={igKey + index} type={igKey}/>
+  //     });
+  //   })
+  //   .reduce((prevElementArray, currentElementArray)=>{ //Flattens array
+  //     return prevElementArray.concat(currentElementArray);
+  //   },[]);
+
+  let transformedIngredients = flattenDeep(Object.keys(props.ingredients)
+  .map((igKey) => {
+    return [...Array(props.ingredients[igKey])].map((_,index) => { //Creates Array of Arrays
+        return <BurgerIngredient key={igKey + index} type={igKey}/>
+    });
+  }));
 
   if (transformedIngredients.length === 0) {
     transformedIngredients = <p> Please start adding ingredients!</p>
