@@ -7,21 +7,7 @@
   border: 1px solid #ccc;
   box-shadow: 2px 2px 3px #ccc;
   justify-content: space-around;
-}
-
-.ContactData input {
-  max-width: 80%;
-  width: 100%;
-  margin: 10px 0;
-  padding: 0.5em;
-  border-radius: 4px;
-  border: 1px solid #808080;
-  box-shadow: inset 1px 1px 2px #ccc;
-  font-size: 1.2rem;
-}
-
-.ContactData input::placeholder {
-  color: #ccc;
+  border-radius: 6px;
 }
 
 .ContactData button {
