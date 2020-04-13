@@ -4,38 +4,21 @@ import Order from '../../components/Order/Order';
 import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
+import Spinner from '../../components/UI/Spinner/Spinner'
 
 class Orders extends Component {
-  state={
-    orders: [],
-    loading: true,
-  }
 
   componentDidMount() {
-    axios.get('/orders.json')
-      .then(response=>{
-        // console.log(response.data) //object with ID as key and object of customer data as value
-        const fetchedOrders=[];
-        for (let key in response.data) {
-          fetchedOrders.push({
-            ...response.data[key],
-            id: key
-          });
-        }
-        console.log(fetchedOrders);
-        this.setState({orders:fetchedOrders, loading: false})
-      })
-      .catch(err=>{
-        this.setState({loading: false})
-      })
+    this.props.onFetchOrders();
   }
 
   render() {
-
-    return (
-      <div className={classes.Orders}>
-        <h4>Order History</h4>
-        {this.state.orders.map(order=>{
+    let orders = <Spinner />
+    if (!this.props.loadingREDUX) {
+      orders =       
+          this.props.orderREDUX.map(order=>{
           return <Order 
             key={order.id}
             orderId={order.id}
@@ -44,10 +27,35 @@ class Orders extends Component {
             price={+order.price}
 
             />
-        })}
+        })
+
+    }
+    
+    return (
+      <div className={classes.Orders}>
+        <h4>Order History</h4>
+        {orders}
       </div>
     );
   }
 }
 
-export default withErrorHandler(Orders,axios) ;
+const mapStateToProps = (state) => {
+  return {
+    orderREDUX: state.order.orders,
+    loadingREDUX: state.order.loading
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onFetchOrders: () => dispatch(actions.fetchOrders()),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(Orders,axios));
+
+
