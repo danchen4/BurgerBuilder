@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-import { updatedObject } from '../utility';
+import { updateObject } from '../utility';
 
 const initialState = {
   orders: [],
@@ -8,14 +8,14 @@ const initialState = {
 }
 
 const purchaseInit = (state,action) => {
-  return updatedObject(state,{purchased: false,})
+  return updateObject(state,{purchased: false,})
 }
 const purchaseBurgerStart = (state,action) => {
-  return updatedObject(state,{loading: true,})
+  return updateObject(state,{loading: true,})
 }
 const purchaseBurgerSuccess = (state,action) => {
-  const newOrder = updatedObject(...action.orderData,{id: action.orderId})
-  return updatedObject(state,{loading: false,purchased: true,orders: state.orders.concat(newOrder)})
+  const newOrder = updateObject(...action.orderData,{id: action.orderId})
+  return updateObject(state,{loading: false,purchased: true,orders: state.orders.concat(newOrder)})
 }
 
 const reducer = (state = initialState, action) => {
@@ -27,13 +27,13 @@ const reducer = (state = initialState, action) => {
      case actionTypes.PURCHASE_BURGER_SUCCESS:
       return purchaseBurgerSuccess (state,action);
     case actionTypes.PURCHASE_BURGER_FAIL:
-      return updatedObject(state,{loading: false,})
+      return updateObject(state,{loading: false,})
     case actionTypes.FETCH_ORDERS_START: 
-      return updatedObject(state,{loading: true,})
+      return updateObject(state,{loading: true,})
     case actionTypes.FETCH_ORDERS_SUCCESS:
-      return updatedObject(state,{orders: action.orders,loading: false,})
+      return updateObject(state,{orders: action.orders,loading: false,})
     case actionTypes.FETCH_ORDERS_FAIL:
-      return updatedObject(state,{loading: false})  
+      return updateObject(state,{loading: false})  
     default:
       return state;
   }

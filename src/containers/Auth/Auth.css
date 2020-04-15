@@ -1,0 +1,22 @@
+.Auth {
+  margin: 30px auto;
+  padding: 2rem 1rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 3px #ccc;
+  justify-content: space-around;
+  border-radius: 6px;
+}
+
+.Auth button {
+  width: 100%;
+}
+
+@media (min-width: 500px) {
+  .Auth {
+    width: 500px;
+  }
+}
