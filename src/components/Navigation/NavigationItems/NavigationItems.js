@@ -4,13 +4,13 @@ import classes from './NavigationItems.css';
 
 const navigationItems = (props) => (
   <ul className={classes.NavigationItems}>
-    <NavigationItem path="/burger" exact>Burger Builder</NavigationItem>
+    <NavigationItem path="/burger" exact clicked={props.clicked}>Burger Builder</NavigationItem>
     {props.isAuth ? 
-      <NavigationItem path="/orders" exact>Orders</NavigationItem>
+      <NavigationItem path="/orders" exact clicked={props.clicked}>Orders</NavigationItem>
       : null}
     {!props.isAuth ? 
-      <NavigationItem path="/auth" exact>Login</NavigationItem> 
-      : <NavigationItem path="/logout" exact>Logout</NavigationItem>}
+      <NavigationItem path="/auth" exact clicked={props.clicked}>Login</NavigationItem> 
+      : <NavigationItem path="/logout" exact clicked={props.clicked}>Logout</NavigationItem>}
   </ul>
 );
 
