@@ -1,10 +1,12 @@
 import React from 'react';
 import classes from './Input.css';
 
-const input = (props) => {
+const input = React.memo((props) => {
   let inputElement = null;
   const inputClasses=[classes.InputElement]
   let validationError = null;
+
+  console.log('<input> RENDER')
 
   if (props.invalid && props.shouldValidate && props.touched) {
     inputClasses.push(classes.Invalid);
@@ -57,6 +59,6 @@ const input = (props) => {
       {inputElement}
     </div>
   );
-};
+});
 
 export default input;

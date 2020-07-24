@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import classes from './Orders.css'
 import Order from '../../components/Order/Order';
 import axios from '../../axios-orders';
@@ -8,36 +8,34 @@ import {connect} from 'react-redux';
 import * as actions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner'
 
-class Orders extends Component {
+export const Orders = (props) => {
 
-  componentDidMount() {
-    this.props.onFetchOrders(this.props.tokenREDUX, this.props.userIdREDUX);
-  }
+  const {onFetchOrders } = props
 
-  render() {
-    let orders = <Spinner />
-    if (!this.props.loadingREDUX) {
-      orders =       
-          this.props.orderREDUX.map(order=>{
-          return <Order 
+  useEffect(()=>{
+    onFetchOrders(props.tokenREDUX, props.userIdREDUX);
+  },[onFetchOrders])
+
+  let orders = <Spinner />
+  if (!props.loadingREDUX) {
+    orders =       
+        props.orderREDUX.map(order=>{
+        return <Order 
             key={order.id}
             orderId={order.id}
             ingredients={order.ingredients}
             deliveryMethod={order.deliveryMethod}
             price={+order.price}
-
-            />
-        })
-
-    }
-    
-    return (
-      <div className={classes.Orders}>
-        <h4>Order History</h4>
-        {orders}
-      </div>
-    );
+          />
+      })
   }
+  
+  return (
+    <div className={classes.Orders}>
+      <h4>Order History</h4>
+      {orders}
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => {
@@ -59,5 +57,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withErrorHandler(Orders,axios));
-
 
